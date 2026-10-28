@@ -2,2500 +2,848 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#07111f">
-<meta name="description" content="Karayel Yazılım 2026 - Modern dijital uygulamalar ve çözümler.">
-
 <title>Karayel Yazılım 2026</title>
 
 <style>
 :root{
-    --bg:#050b16;
-    --bg2:#091426;
-    --card:rgba(13,25,45,.72);
-    --card2:rgba(17,31,55,.82);
-    --text:#f4f8ff;
-    --muted:#8fa2bd;
-    --line:rgba(255,255,255,.09);
-    --blue:#3187ff;
-    --blue2:#6a5cff;
-    --cyan:#24d8ff;
-    --green:#32e6a1;
-    --danger:#ff5f7e;
-    --shadow:0 25px 80px rgba(0,0,0,.35);
-    --radius:28px;
+  --bg:#07111f;
+  --panel:#0e1b2d;
+  --panel2:#12243b;
+  --text:#edf4ff;
+  --muted:#9fb0c8;
+  --blue:#3288ff;
+  --purple:#8b5cf6;
+  --border:rgba(160,190,230,.15);
+  --green:#22c55e;
+  --red:#ef4444;
 }
-
-body.light{
-    --bg:#f4f8ff;
-    --bg2:#eaf1fb;
-    --card:rgba(255,255,255,.76);
-    --card2:rgba(255,255,255,.9);
-    --text:#0a1425;
-    --muted:#607089;
-    --line:rgba(10,30,60,.10);
-    --shadow:0 25px 70px rgba(35,65,110,.14);
-}
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-    font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-    background:
-        radial-gradient(circle at 10% 10%,rgba(49,135,255,.12),transparent 28%),
-        radial-gradient(circle at 90% 20%,rgba(106,92,255,.12),transparent 28%),
-        linear-gradient(135deg,var(--bg),var(--bg2));
-    color:var(--text);
-    min-height:100vh;
-    overflow-x:hidden;
-    transition:background .4s ease,color .4s ease;
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
 }
-
-/* =========================
-   BACKGROUND
-========================= */
-
-.background{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
-    z-index:-2;
-}
-
-.orb{
-    position:absolute;
-    border-radius:50%;
-    filter:blur(70px);
-    opacity:.25;
-    animation:floatOrb 12s ease-in-out infinite;
-}
-
-.orb.one{
-    width:350px;
-    height:350px;
-    background:#237cff;
-    left:-120px;
-    top:15%;
-}
-
-.orb.two{
-    width:420px;
-    height:420px;
-    background:#765cff;
-    right:-150px;
-    top:50%;
-    animation-delay:-4s;
-}
-
-.orb.three{
-    width:280px;
-    height:280px;
-    background:#13d8e9;
-    left:40%;
-    bottom:-140px;
-    animation-delay:-7s;
-}
-
-.grid-bg{
-    position:absolute;
-    inset:0;
-    opacity:.15;
-    background-image:
-        linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
-    background-size:55px 55px;
-    mask-image:linear-gradient(to bottom,black,transparent 90%);
-}
-
-@keyframes floatOrb{
-    0%,100%{
-        transform:translate3d(0,0,0) scale(1);
-    }
-    50%{
-        transform:translate3d(30px,-40px,0) scale(1.08);
-    }
-}
-
-/* =========================
-   HEADER
-========================= */
-
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.wrap{width:min(1150px,94%);margin:auto}
 header{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    height:78px;
-    z-index:1000;
-    display:flex;
-    justify-content:center;
-    padding:12px 20px;
+  position:sticky;top:0;z-index:100;
+  background:rgba(7,17,31,.94);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
 }
-
-.navbar{
-    width:min(1180px,100%);
-    height:54px;
-    padding:0 10px 0 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    background:rgba(7,17,31,.68);
-    border:1px solid var(--line);
-    border-radius:20px;
-
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.18),
-        inset 0 1px rgba(255,255,255,.04);
+.nav{
+  min-height:72px;display:flex;align-items:center;
+  justify-content:space-between;gap:15px;flex-wrap:wrap;
+  padding:12px 0;
 }
-
-body.light .navbar{
-    background:rgba(255,255,255,.72);
-}
-
 .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    cursor:pointer;
-    user-select:none;
+  font-size:21px;font-weight:900;
+  background:linear-gradient(90deg,#60a5fa,#a78bfa);
+  color:transparent;background-clip:text;
 }
-
-.logo-icon{
-    width:38px;
-    height:38px;
-    border-radius:12px;
-    display:grid;
-    place-items:center;
-    font-weight:900;
-    font-size:17px;
-    color:white;
-
-    background:
-        linear-gradient(135deg,#3187ff,#6a5cff);
-
-    box-shadow:
-        0 8px 25px rgba(49,135,255,.35);
+.navlinks{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.navlinks button{
+  color:var(--muted);background:transparent;
+  border:1px solid transparent;border-radius:10px;
+  padding:10px 12px;
 }
-
-.logo-text{
-    font-weight:850;
-    letter-spacing:-.5px;
+.navlinks button:hover,.navlinks button.active{
+  color:white;background:var(--panel2);
+  border-color:var(--border);
 }
-
-.logo-text span{
-    color:#4e9cff;
+button.primary,.primary{
+  color:white;background:linear-gradient(135deg,var(--blue),var(--purple));
+  border:0;border-radius:11px;padding:11px 16px;font-weight:700;
 }
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:4px;
+button.secondary{
+  background:var(--panel2);color:var(--text);
+  border:1px solid var(--border);border-radius:10px;padding:10px 13px;
 }
-
-.nav-btn{
-    border:0;
-    background:transparent;
-    color:var(--muted);
-    padding:10px 13px;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:700;
-    transition:.25s ease;
-    position:relative;
+button.danger{
+  background:#401a27;color:#fecaca;border:1px solid #713044;
+  border-radius:10px;padding:10px 13px;
 }
-
-.nav-btn:hover{
-    color:var(--text);
-    background:rgba(255,255,255,.06);
-}
-
-.nav-btn.active{
-    color:var(--text);
-    background:rgba(49,135,255,.13);
-}
-
-.nav-btn.active::after{
-    content:"";
-    position:absolute;
-    height:3px;
-    width:18px;
-    border-radius:10px;
-    background:linear-gradient(90deg,#3187ff,#8c75ff);
-    left:50%;
-    bottom:3px;
-    transform:translateX(-50%);
-}
-
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:7px;
-}
-
-.icon-btn{
-    width:38px;
-    height:38px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.045);
-    color:var(--text);
-    border-radius:12px;
-    cursor:pointer;
-    display:grid;
-    place-items:center;
-    font-size:17px;
-    transition:.25s ease;
-}
-
-.icon-btn:hover{
-    transform:translateY(-2px);
-    background:rgba(49,135,255,.14);
-    border-color:rgba(49,135,255,.35);
-}
-
-.mobile-menu{
-    display:none;
-}
-
-/* =========================
-   PAGE SYSTEM
-========================= */
-
-#app{
-    min-height:100vh;
-    padding-top:78px;
-}
-
-.page{
-    display:none;
-    min-height:calc(100vh - 78px);
-    padding:55px 20px 80px;
-}
-
-.page.active{
-    display:block;
-    animation:pageIn .5s cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes pageIn{
-    from{
-        opacity:0;
-        transform:translateY(18px) scale(.985);
-        filter:blur(4px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-        filter:blur(0);
-    }
-}
-
-.container{
-    width:min(1180px,100%);
-    margin:auto;
-}
-
-/* =========================
-   HOME
-========================= */
-
+button:disabled{opacity:.5;cursor:not-allowed}
+main{padding:24px 0 55px}
+.page{animation:fade .2s ease}
+@keyframes fade{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}
 .hero{
-    min-height:calc(100vh - 140px);
-    display:grid;
-    grid-template-columns:1.05fr .95fr;
-    align-items:center;
-    gap:60px;
+  padding:60px 0 45px;
+  display:grid;grid-template-columns:1.5fr 1fr;
+  align-items:center;gap:30px;
 }
-
 .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 13px;
-    border:1px solid rgba(49,135,255,.22);
-    border-radius:999px;
-    background:rgba(49,135,255,.08);
-    color:#75adff;
-    font-size:12px;
-    font-weight:800;
-    margin-bottom:22px;
+  display:inline-block;padding:8px 12px;border-radius:30px;
+  background:#12294a;color:#93c5fd;border:1px solid #24466e;
+  font-size:13px;
 }
-
-.badge-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#35e9a4;
-    box-shadow:0 0 12px #35e9a4;
+h1{font-size:clamp(34px,5vw,60px);line-height:1.08;margin:18px 0}
+h2{font-size:clamp(23px,3vw,32px);margin:0 0 18px}
+h3{margin:0 0 10px}
+p{line-height:1.65}
+.hero p{max-width:650px;color:var(--muted);font-size:17px}
+.hero-art{
+  min-height:260px;display:grid;place-items:center;
+  border:1px solid var(--border);border-radius:26px;
+  background:radial-gradient(circle at 30% 30%,#1e4e8b,#121d39 55%,#101525);
+  box-shadow:0 25px 80px #0005;
 }
-
-.hero h1{
-    font-size:clamp(45px,6vw,78px);
-    line-height:.98;
-    letter-spacing:-4px;
-    max-width:760px;
+.hero-icon{font-size:100px;filter:drop-shadow(0 0 25px #3288ff88)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:10px 0 45px}
+.stat,.card,.box{
+  background:linear-gradient(145deg,var(--panel),#0a1626);
+  border:1px solid var(--border);border-radius:17px;padding:20px;
 }
-
-.gradient-text{
-    background:linear-gradient(
-        90deg,
-        #fff,
-        #6ba8ff 35%,
-        #987dff 70%,
-        #35dfff
-    );
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+.stat strong{display:block;font-size:26px;margin-bottom:5px}
+.stat span{font-size:13px;color:var(--muted)}
+.section-head{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;margin:35px 0 18px;
 }
-
-body.light .gradient-text{
-    background:linear-gradient(
-        90deg,
-        #0b1729,
-        #237cff 45%,
-        #6557df
-    );
-    -webkit-background-clip:text;
-    background-clip:text;
-}
-
-.hero p{
-    color:var(--muted);
-    max-width:650px;
-    margin-top:24px;
-    font-size:17px;
-    line-height:1.8;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    margin-top:32px;
-}
-
-.btn{
-    border:0;
-    border-radius:15px;
-    padding:14px 20px;
-    font-weight:800;
-    font-size:14px;
-    cursor:pointer;
-    color:white;
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
-    transition:.3s cubic-bezier(.2,.8,.2,1);
-}
-
-.btn-primary{
-    background:linear-gradient(135deg,#3187ff,#665cff);
-    box-shadow:0 12px 35px rgba(49,135,255,.25);
-}
-
-.btn-primary:hover{
-    transform:translateY(-4px);
-    box-shadow:0 18px 45px rgba(49,135,255,.38);
-}
-
-.btn-secondary{
-    color:var(--text);
-    background:rgba(255,255,255,.05);
-    border:1px solid var(--line);
-}
-
-.btn-secondary:hover{
-    transform:translateY(-3px);
-    background:rgba(255,255,255,.09);
-}
-
-.hero-visual{
-    position:relative;
-}
-
-.dashboard{
-    position:relative;
-    min-height:430px;
-    border-radius:34px;
-    border:1px solid var(--line);
-    background:
-        linear-gradient(145deg,
-        rgba(49,135,255,.13),
-        rgba(106,92,255,.08) 50%,
-        rgba(255,255,255,.025));
-    box-shadow:var(--shadow);
-    backdrop-filter:blur(20px);
-    padding:22px;
-    overflow:hidden;
-    transform:perspective(1200px) rotateY(-5deg) rotateX(3deg);
-    animation:dashboardFloat 5s ease-in-out infinite;
-}
-
-@keyframes dashboardFloat{
-    0%,100%{
-        transform:perspective(1200px) rotateY(-5deg) rotateX(3deg) translateY(0);
-    }
-    50%{
-        transform:perspective(1200px) rotateY(-5deg) rotateX(3deg) translateY(-10px);
-    }
-}
-
-.dashboard::before{
-    content:"";
-    position:absolute;
-    width:250px;
-    height:250px;
-    background:#3187ff;
-    filter:blur(100px);
-    opacity:.16;
-    right:-80px;
-    top:-80px;
-}
-
-.window-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding-bottom:20px;
-    border-bottom:1px solid var(--line);
-}
-
-.window-dots{
-    display:flex;
-    gap:7px;
-}
-
-.window-dots span{
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:rgba(255,255,255,.2);
-}
-
-.window-title{
-    color:var(--muted);
-    font-size:11px;
-    font-weight:700;
-}
-
-.dashboard-content{
-    padding-top:25px;
-}
-
-.mini-title{
-    color:var(--muted);
-    font-size:11px;
-    font-weight:700;
-}
-
-.mini-big{
-    font-size:30px;
-    font-weight:900;
-    margin-top:5px;
-}
-
-.chart{
-    height:130px;
-    margin-top:25px;
-    display:flex;
-    align-items:end;
-    gap:9px;
-}
-
-.bar{
-    flex:1;
-    border-radius:8px 8px 3px 3px;
-    background:linear-gradient(to top,#3187ff,#8d78ff);
-    opacity:.75;
-    animation:barPulse 2s ease-in-out infinite alternate;
-}
-
-.bar:nth-child(1){height:35%}
-.bar:nth-child(2){height:55%;animation-delay:.1s}
-.bar:nth-child(3){height:42%;animation-delay:.2s}
-.bar:nth-child(4){height:75%;animation-delay:.3s}
-.bar:nth-child(5){height:62%;animation-delay:.4s}
-.bar:nth-child(6){height:90%;animation-delay:.5s}
-.bar:nth-child(7){height:70%;animation-delay:.6s}
-
-@keyframes barPulse{
-    from{filter:brightness(.9)}
-    to{filter:brightness(1.25)}
-}
-
-.dashboard-cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:20px;
-}
-
-.mini-card{
-    padding:13px;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.035);
-    border-radius:15px;
-}
-
-.mini-card b{
-    display:block;
-    font-size:17px;
-}
-
-.mini-card span{
-    color:var(--muted);
-    font-size:9px;
-}
-
-/* =========================
-   SECTION HEADER
-========================= */
-
-.page-header{
-    text-align:center;
-    max-width:750px;
-    margin:10px auto 45px;
-}
-
-.page-header .badge{
-    margin-bottom:14px;
-}
-
-.page-header h2{
-    font-size:clamp(35px,5vw,56px);
-    letter-spacing:-2.5px;
-}
-
-.page-header p{
-    color:var(--muted);
-    line-height:1.7;
-    margin-top:15px;
-}
-
-/* =========================
-   APPS
-========================= */
-
-.search-box{
-    max-width:600px;
-    margin:0 auto 35px;
-    position:relative;
-}
-
-.search-box input{
-    width:100%;
-    padding:17px 20px 17px 50px;
-    border-radius:17px;
-    border:1px solid var(--line);
-    outline:none;
-    background:var(--card);
-    color:var(--text);
-    font-size:14px;
-    backdrop-filter:blur(18px);
-    transition:.3s ease;
-}
-
-.search-box input:focus{
-    border-color:rgba(49,135,255,.5);
-    box-shadow:0 0 0 4px rgba(49,135,255,.08);
-}
-
-.search-icon{
-    position:absolute;
-    left:19px;
-    top:50%;
-    transform:translateY(-50%);
-    opacity:.55;
-}
-
-.apps-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.app-card{
-    position:relative;
-    padding:24px;
-    min-height:225px;
-    border-radius:var(--radius);
-    border:1px solid var(--line);
-    background:var(--card);
-    backdrop-filter:blur(18px);
-    overflow:hidden;
-    cursor:pointer;
-    transition:
-        transform .35s cubic-bezier(.2,.8,.2,1),
-        border-color .35s ease,
-        box-shadow .35s ease;
-}
-
-.app-card::before{
-    content:"";
-    position:absolute;
-    width:130px;
-    height:130px;
-    border-radius:50%;
-    background:var(--app-color,#3187ff);
-    filter:blur(70px);
-    opacity:.10;
-    right:-50px;
-    top:-50px;
-    transition:.4s ease;
-}
-
-.app-card:hover{
-    transform:translateY(-8px);
-    border-color:rgba(82,145,255,.28);
-    box-shadow:0 22px 55px rgba(0,0,0,.22);
-}
-
-.app-card:hover::before{
-    opacity:.25;
-    transform:scale(1.5);
-}
-
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{display:flex;flex-direction:column;min-width:0;transition:.2s}
+.card:hover{transform:translateY(-3px);border-color:#3288ff77}
 .app-icon{
-    width:55px;
-    height:55px;
-    border-radius:17px;
-    display:grid;
-    place-items:center;
-    font-size:24px;
-    background:rgba(49,135,255,.12);
-    border:1px solid rgba(49,135,255,.17);
-    margin-bottom:20px;
+  width:53px;height:53px;display:grid;place-items:center;
+  background:#172d4b;border-radius:15px;font-size:27px;margin-bottom:15px;
 }
-
-.app-card h3{
-    font-size:18px;
-    margin-bottom:8px;
+.card p{color:var(--muted);font-size:14px;flex:1;overflow-wrap:anywhere}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.card-actions button{flex:1}
+input,textarea,select{
+  width:100%;padding:12px 13px;border-radius:10px;
+  border:1px solid var(--border);background:#081525;color:var(--text);
+  outline:none;min-width:0;
 }
-
-.app-card p{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.65;
+input:focus,textarea:focus,select:focus{border-color:var(--blue)}
+textarea{min-height:110px;resize:vertical}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.full{grid-column:1/-1}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.notice{
+  margin:12px 0;padding:12px 14px;border-radius:10px;
+  background:#12243b;border:1px solid var(--border);font-size:14px;
+  overflow-wrap:anywhere;
 }
-
-.app-footer{
-    position:absolute;
-    left:24px;
-    right:24px;
-    bottom:20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.notice.error{background:#381a25;color:#fecaca}
+.notice.success{background:#102f27;color:#bbf7d0}
+.list{display:grid;gap:12px}
+.row{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:14px;flex-wrap:wrap;
+  padding:15px;background:var(--panel);border:1px solid var(--border);
+  border-radius:13px;
 }
-
-.status{
-    font-size:10px;
-    color:#35dda1;
-    display:flex;
-    gap:6px;
-    align-items:center;
-    font-weight:800;
+.row p{margin:5px 0;color:var(--muted);font-size:14px}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:28px 0;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px}
+#toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  z-index:200;background:#172b43;border:1px solid var(--border);
+  padding:13px 18px;border-radius:12px;max-width:92%;display:none;
+  box-shadow:0 10px 40px #0007;
 }
-
-.status i{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:#35dda1;
-    box-shadow:0 0 9px #35dda1;
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr;padding-top:35px}
+  .hero-art{min-height:180px}
+  .hero-icon{font-size:75px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nav{align-items:flex-start}
+  .navlinks{width:100%}
+  .navlinks button{padding:8px;font-size:13px}
 }
-
-.open-arrow{
-    width:30px;
-    height:30px;
-    display:grid;
-    place-items:center;
-    border-radius:10px;
-    background:rgba(255,255,255,.05);
-    color:var(--muted);
-    transition:.25s;
-}
-
-.app-card:hover .open-arrow{
-    background:#3187ff;
-    color:white;
-    transform:translateX(4px);
-}
-
-/* =========================
-   AI
-========================= */
-
-.ai-page{
-    padding-bottom:35px;
-}
-
-.ai-shell{
-    max-width:950px;
-    height:min(700px,calc(100vh - 175px));
-    min-height:540px;
-    margin:auto;
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-    border-radius:30px;
-    border:1px solid var(--line);
-    background:rgba(7,16,30,.72);
-    box-shadow:var(--shadow);
-    backdrop-filter:blur(25px);
-}
-
-body.light .ai-shell{
-    background:rgba(255,255,255,.78);
-}
-
-.ai-top{
-    padding:18px 22px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid var(--line);
-}
-
-.ai-brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.ai-avatar{
-    width:43px;
-    height:43px;
-    border-radius:14px;
-    display:grid;
-    place-items:center;
-    font-size:20px;
-    background:linear-gradient(135deg,#3187ff,#795cff);
-    box-shadow:0 8px 25px rgba(49,135,255,.3);
-}
-
-.ai-brand b{
-    display:block;
-}
-
-.ai-brand span{
-    display:block;
-    color:#35dda1;
-    font-size:10px;
-    margin-top:3px;
-}
-
-.ai-chat{
-    flex:1;
-    overflow-y:auto;
-    padding:25px;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-}
-
-.message{
-    max-width:75%;
-    padding:14px 17px;
-    border-radius:18px;
-    font-size:13px;
-    line-height:1.65;
-    animation:messageIn .3s ease;
-}
-
-@keyframes messageIn{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-    to{
-        opacity:1;
-        transform:none;
-    }
-}
-
-.message.ai{
-    align-self:flex-start;
-    background:rgba(255,255,255,.055);
-    border:1px solid var(--line);
-    border-bottom-left-radius:5px;
-}
-
-.message.user{
-    align-self:flex-end;
-    background:linear-gradient(135deg,#3187ff,#665cff);
-    color:white;
-    border-bottom-right-radius:5px;
-}
-
-.ai-input{
-    padding:15px;
-    border-top:1px solid var(--line);
-    display:flex;
-    gap:9px;
-}
-
-.ai-input input{
-    flex:1;
-    min-width:0;
-    border:1px solid var(--line);
-    border-radius:15px;
-    background:rgba(255,255,255,.045);
-    color:var(--text);
-    padding:14px;
-    outline:none;
-}
-
-.ai-send{
-    width:50px;
-    border:0;
-    border-radius:15px;
-    color:white;
-    background:linear-gradient(135deg,#3187ff,#665cff);
-    cursor:pointer;
-    font-size:17px;
-}
-
-/* =========================
-   NEWS
-========================= */
-
-.news-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.news-card{
-    padding:25px;
-    border-radius:var(--radius);
-    border:1px solid var(--line);
-    background:var(--card);
-    transition:.3s;
-}
-
-.news-card:hover{
-    transform:translateY(-7px);
-    box-shadow:var(--shadow);
-}
-
-.news-date{
-    color:#6ea9ff;
-    font-size:11px;
-    font-weight:800;
-}
-
-.news-card h3{
-    margin:14px 0 10px;
-    font-size:19px;
-}
-
-.news-card p{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.7;
-}
-
-/* =========================
-   ABOUT
-========================= */
-
-.about-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-}
-
-.info-card{
-    padding:30px;
-    border-radius:var(--radius);
-    border:1px solid var(--line);
-    background:var(--card);
-}
-
-.info-card h3{
-    font-size:23px;
-    margin-bottom:14px;
-}
-
-.info-card p{
-    color:var(--muted);
-    line-height:1.8;
-    font-size:14px;
-}
-
-.values{
-    display:grid;
-    gap:12px;
-    margin-top:20px;
-}
-
-.value{
-    display:flex;
-    gap:13px;
-    align-items:center;
-    padding:13px;
-    border-radius:15px;
-    background:rgba(255,255,255,.035);
-    border:1px solid var(--line);
-}
-
-.value-icon{
-    width:38px;
-    height:38px;
-    display:grid;
-    place-items:center;
-    border-radius:12px;
-    background:rgba(49,135,255,.12);
-}
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact-grid{
-    display:grid;
-    grid-template-columns:.8fr 1.2fr;
-    gap:22px;
-}
-
-.contact-cards{
-    display:grid;
-    gap:13px;
-}
-
-.contact-item{
-    padding:20px;
-    border-radius:20px;
-    border:1px solid var(--line);
-    background:var(--card);
-}
-
-.contact-item span{
-    color:var(--muted);
-    font-size:11px;
-}
-
-.contact-item strong{
-    display:block;
-    margin-top:7px;
-}
-
-.contact-form{
-    padding:25px;
-    border-radius:var(--radius);
-    border:1px solid var(--line);
-    background:var(--card);
-}
-
-.form-group{
-    margin-bottom:14px;
-}
-
-.form-group label{
-    display:block;
-    color:var(--muted);
-    font-size:11px;
-    margin-bottom:7px;
-}
-
-.form-group input,
-.form-group textarea{
-    width:100%;
-    border:1px solid var(--line);
-    background:rgba(255,255,255,.04);
-    color:var(--text);
-    border-radius:14px;
-    padding:14px;
-    outline:none;
-    font:inherit;
-}
-
-.form-group textarea{
-    min-height:140px;
-    resize:vertical;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    border-top:1px solid var(--line);
-    padding:25px 20px;
-    text-align:center;
-    color:var(--muted);
-    font-size:11px;
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:25px;
-    transform:translate(-50%,30px);
-    padding:13px 18px;
-    border-radius:14px;
-    background:#101d32;
-    color:white;
-    border:1px solid rgba(255,255,255,.1);
-    box-shadow:var(--shadow);
-    opacity:0;
-    pointer-events:none;
-    transition:.35s;
-    z-index:2000;
-    font-size:12px;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translate(-50%,0);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:900px){
-
-    .nav-links{
-        display:none;
-    }
-
-    .mobile-menu{
-        display:grid;
-        place-items:center;
-    }
-
-    .nav-links.mobile-open{
-        display:flex;
-        position:absolute;
-        top:68px;
-        left:15px;
-        right:15px;
-        padding:12px;
-        flex-direction:column;
-        align-items:stretch;
-        background:rgba(7,17,31,.94);
-        border:1px solid var(--line);
-        border-radius:20px;
-        backdrop-filter:blur(25px);
-        box-shadow:var(--shadow);
-        animation:menuIn .3s ease;
-    }
-
-    body.light .nav-links.mobile-open{
-        background:rgba(255,255,255,.95);
-    }
-
-    @keyframes menuIn{
-        from{
-            opacity:0;
-            transform:translateY(-8px);
-        }
-        to{
-            opacity:1;
-            transform:none;
-        }
-    }
-
-    .hero{
-        grid-template-columns:1fr;
-        gap:40px;
-        padding-top:20px;
-    }
-
-    .hero h1{
-        letter-spacing:-2.5px;
-    }
-
-    .hero-visual{
-        max-width:650px;
-        width:100%;
-        margin:auto;
-    }
-
-    .apps-grid,
-    .news-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .about-grid,
-    .contact-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:600px){
-
-    header{
-        padding:9px 10px;
-    }
-
-    .navbar{
-        height:54px;
-        padding-left:12px;
-    }
-
-    .logo-text{
-        font-size:13px;
-    }
-
-    #app{
-        padding-top:72px;
-    }
-
-    .page{
-        padding:35px 14px 55px;
-    }
-
-    .hero{
-        min-height:auto;
-        padding-top:35px;
-    }
-
-    .hero h1{
-        font-size:45px;
-    }
-
-    .hero p{
-        font-size:14px;
-    }
-
-    .hero-buttons{
-        display:grid;
-        grid-template-columns:1fr;
-    }
-
-    .btn{
-        justify-content:center;
-    }
-
-    .dashboard{
-        min-height:350px;
-        padding:17px;
-        transform:none;
-    }
-
-    .apps-grid,
-    .news-grid{
-        grid-template-columns:1fr;
-    }
-
-    .app-card{
-        min-height:210px;
-    }
-
-    .page-header{
-        margin-bottom:30px;
-    }
-
-    .page-header h2{
-        font-size:38px;
-    }
-
-    .ai-shell{
-        height:calc(100vh - 125px);
-        min-height:480px;
-        border-radius:23px;
-    }
-
-    .message{
-        max-width:88%;
-    }
-
-    .ai-chat{
-        padding:16px;
-    }
-
-    .dashboard-cards{
-        grid-template-columns:1fr 1fr 1fr;
-    }
-
-    .mini-big{
-        font-size:23px;
-    }
-
-    .header-actions .icon-btn:first-child{
-        display:none;
-    }
+@media(max-width:520px){
+  .grid{grid-template-columns:1fr}
+  .stats{gap:7px}
+  .stat{padding:12px}
+  .stat strong{font-size:21px}
+  .form-grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .navlinks button{font-size:12px;padding:8px 9px}
+  .logo{font-size:19px}
 }
 </style>
 </head>
 
 <body>
-
-<div class="background">
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="orb three"></div>
-    <div class="grid-bg"></div>
-</div>
-
 <header>
-    <nav class="navbar">
-
-        <div class="logo" onclick="navigate('home')">
-            <div class="logo-icon">K</div>
-            <div class="logo-text">
-                Karayel <span>Yazılım</span>
-            </div>
-        </div>
-
-        <div class="nav-links" id="navLinks">
-
-            <button class="nav-btn active" data-page="home"
-                    onclick="navigate('home')">
-                Ana Sayfa
-            </button>
-
-            <button class="nav-btn" data-page="apps"
-                    onclick="navigate('apps')">
-                Uygulamalar
-            </button>
-
-            <button class="nav-btn" data-page="ai"
-                    onclick="navigate('ai')">
-                Karayel AI
-            </button>
-
-            <button class="nav-btn" data-page="news"
-                    onclick="navigate('news')">
-                Güncellemeler
-            </button>
-
-            <button class="nav-btn" data-page="about"
-                    onclick="navigate('about')">
-                Hakkımızda
-            </button>
-
-            <button class="nav-btn" data-page="contact"
-                    onclick="navigate('contact')">
-                İletişim
-            </button>
-
-        </div>
-
-        <div class="header-actions">
-
-            <button class="icon-btn"
-                    onclick="toggleTheme()"
-                    id="themeButton"
-                    title="Tema">
-                🌙
-            </button>
-
-            <button class="icon-btn mobile-menu"
-                    onclick="toggleMenu()">
-                ☰
-            </button>
-
-        </div>
-
+  <div class="wrap nav">
+    <a href="#home" class="logo" onclick="go('home')">⚡ KARAYEL YAZILIM</a>
+    <nav class="navlinks" aria-label="Ana menü">
+      <button onclick="go('home')">Ana Sayfa</button>
+      <button onclick="go('apps')">Uygulamalar</button>
+      <button onclick="go('favorites')">⭐ Seçtiklerim</button>
+      <button onclick="go('notes')">Proje Notları</button>
+      <button onclick="go('backup')">Yedekleme</button>
+      <button onclick="go('quran')">Kur’an</button>
+      <button id="accountButton" class="primary" onclick="go('account')">Giriş / Kayıt</button>
     </nav>
+  </div>
 </header>
 
+<main class="wrap">
 
-<main id="app">
-
-<!-- ================= HOME ================= -->
-
-<section class="page active" id="page-home">
-
-    <div class="container">
-
-        <div class="hero">
-
-            <div>
-
-                <div class="badge">
-                    <span class="badge-dot"></span>
-                    KARAYEL YAZILIM 2026
-                </div>
-
-                <h1>
-                    Dijital dünyaya
-                    <span class="gradient-text">
-                        yeni bir soluk.
-                    </span>
-                </h1>
-
-                <p>
-                    Karayel Yazılım; günlük hayatı kolaylaştıran,
-                    modern, hızlı ve kullanışlı dijital uygulamalar
-                    geliştirmek için oluşturulmuş yeni nesil bir
-                    yazılım platformudur.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <button class="btn btn-primary"
-                            onclick="navigate('apps')">
-                        Uygulamaları Keşfet
-                        <span>→</span>
-                    </button>
-
-                    <button class="btn btn-secondary"
-                            onclick="navigate('ai')">
-                        🤖 Karayel AI
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="hero-visual">
-
-                <div class="dashboard">
-
-                    <div class="window-top">
-
-                        <div class="window-dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-
-                        <div class="window-title">
-                            KARAYEL SYSTEM 2026
-                        </div>
-
-                    </div>
-
-                    <div class="dashboard-content">
-
-                        <div class="mini-title">
-                            KARAYEL YAZILIM
-                        </div>
-
-                        <div class="mini-big">
-                            Dijital Ekosistem
-                        </div>
-
-                        <div class="chart">
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                            <div class="bar"></div>
-                        </div>
-
-                        <div class="dashboard-cards">
-
-                            <div class="mini-card">
-                                <b>10+</b>
-                                <span>Uygulama</span>
-                            </div>
-
-                            <div class="mini-card">
-                                <b>2026</b>
-                                <span>Yeni Nesil</span>
-                            </div>
-
-                            <div class="mini-card">
-                                <b>24/7</b>
-                                <span>Erişim</span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+<section id="home" class="page">
+  <div class="hero">
+    <div>
+      <span class="badge">✦ Teknoloji • Tasarım • Yenilik</span>
+      <h1>Hayallerini<br><span style="color:#60a5fa">dijitale taşı.</span></h1>
+      <p>
+        Karayel Yazılım dünyasına hoş geldin. Uygulamalarımızı keşfet,
+        projelerimizi incele ve dijital araçlarını tek bir yerde bul.
+      </p>
+      <div class="actions">
+        <button class="primary" onclick="go('apps')">Uygulamaları Keşfet →</button>
+        <button class="secondary" onclick="go('account')">Hesabım</button>
+      </div>
     </div>
+    <div class="hero-art"><div class="hero-icon">🚀</div></div>
+  </div>
 
+  <div class="stats">
+    <div class="stat"><strong id="appCount">0</strong><span>Uygulama</span></div>
+    <div class="stat"><strong id="memberState">Misafir</strong><span>Hesap durumu</span></div>
+    <div class="stat"><strong>2026</strong><span>Yeni fikirler, yeni projeler</span></div>
+  </div>
+
+  <div class="section-head">
+    <h2>Öne Çıkan Uygulamalar</h2>
+    <button class="secondary" onclick="go('apps')">Tümünü gör →</button>
+  </div>
+  <div id="homeApps" class="grid"></div>
+
+  <div class="section-head"><h2>Karayel Yazılım</h2></div>
+  <div class="box">
+    <p class="muted">
+      Amacımız kullanışlı, modern ve kolay erişilebilir dijital uygulamalar
+      geliştirmek. Projelerimizi zaman içinde yenileyerek geliştirmeye devam ediyoruz.
+    </p>
+    <p>Hazırlayan: <strong>Muhammed Karayel</strong></p>
+  </div>
 </section>
 
-
-<!-- ================= APPS ================= -->
-
-<section class="page" id="page-apps">
-
-    <div class="container">
-
-        <div class="page-header">
-
-            <div class="badge">
-                KARAYEL UYGULAMALARI
-            </div>
-
-            <h2>
-                Üretkenliğin için
-                <span class="gradient-text">güçlü araçlar.</span>
-            </h2>
-
-            <p>
-                Karayel Yazılım tarafından geliştirilen uygulamaları
-                tek bir merkezden keşfet.
-            </p>
-
-        </div>
-
-
-        <div class="search-box">
-
-            <span class="search-icon">⌕</span>
-
-            <input
-                type="text"
-                id="appSearch"
-                placeholder="Uygulama ara..."
-                oninput="searchApps()">
-
-        </div>
-
-
-        <div class="apps-grid" id="appsGrid">
-
-            <div class="app-card"
-                 style="--app-color:#3187ff"
-                 data-name="Karayel Fotoğraf Editörü"
-                 onclick="openApp('Karayel Fotoğraf Editörü')">
-
-                <div class="app-icon">🖼️</div>
-
-                <h3>
-                    Karayel Fotoğraf Editörü
-                </h3>
-
-                <p>
-                    Fotoğraflarını düzenle, filtrele,
-                    kırp ve geliştir.
-                </p>
-
-                <div class="app-footer">
-
-                    <div class="status">
-                        <i></i>
-                        Hazır
-                    </div>
-
-                    <div class="open-arrow">
-                        →
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="app-card"
-                 style="--app-color:#31dba2"
-                 data-name="Karayel Excel 2026"
-                 onclick="openApp('Karayel Excel 2026')">
-
-                <div class="app-icon">📊</div>
-
-                <h3>
-                    Karayel Excel 2026
-                </h3>
-
-                <p>
-                    Tablolarını oluştur, hesaplamalarını
-                    yap ve verilerini düzenle.
-                </p>
-
-                <div class="app-footer">
-
-                    <div class="status">
-                        <i></i>
-                        Hazır
-                    </div>
-
-                    <div class="open-arrow">
-                        →
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="app-card"
-                 style="--app-color:#b06cff"
-                 data-name="Karayel Not Defteri"
-                 onclick="openApp('Karayel Not Defteri')">
-
-                <div class="app-icon">📝</div>
-
-                <h3>
-                    Karayel Not Defteri
-                </h3>
-
-                <p>
-                    Notlarını hızlıca oluştur,
-                    düzenle ve kaydet.
-                </p>
-
-                <div class="app-footer">
-
-                    <div class="status">
-                        <i></i>
-                        Hazır
-                    </div>
-
-                    <div class="open-arrow">
-                        →
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="app-card"
-                 style="--app-color:#24d8ff"
-                 data-name="Karayel Zikirmatik"
-                 onclick="openApp('Karayel Zikirmatik')">
-
-                <div class="app-icon">📿</div>
-
-                <h3>
-                    Karayel Zikirmatik
-                </h3>
-
-                <p>
-                    Zikirlerini takip etmek için
-                    sade ve kullanışlı uygulama.
-                </p>
-
-                <div class="app-footer">
-
-                    <div class="status">
-                        <i></i>
-                        Hazır
-                    </div>
-
-                    <div class="open-arrow">
-                        →
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="app-card"
-                 style="--app-color:#ff6f91"
-                 data-name="Karayel Video Player"
-                 onclick="openApp('Karayel Video Player')">
-
-                <div class="app-icon">▶️</div>
-
-                <h3>
-                    Karayel Video Player
-                </h3>
-
-                <p>
-                    Videolarını modern ve sade
-                    bir oynatıcıyla izle.
-                </p>
-
-                <div class="app-footer">
-
-                    <div class="status">
-                        <i></i>
-                        Hazır
-                    </div>
-
-                    <div class="open-arrow">
-                        →
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="app-card"
-                 style="--app-color:#ffb84d"
-                 data-name="Karayel PDF"
-                 onclick="openApp('Karayel PDF')">
-
-                <div class="app-icon">📄</div>
-
-                <h3>
-                    Karayel PDF
-                </h3>
-
-                <p>
-                    PDF dosyalarını görüntülemek
-                    ve yönetmek için araçlar.
-                </p>
-
-                <div class="app-footer">
-
-                    <div class="status">
-                        <i></i>
-                        Hazır
-                    </div>
-
-                    <div class="open-arrow">
-                        →
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="app-card"
-                 style="--app-color:#35dda1"
-                 data-name="Karayel Hesap Makinesi"
-                 onclick="openApp('Karayel Hesap Makinesi')">
-
-                <div class="app-icon">🧮</div>
-
-                <h3>
-                    Karayel Hesap Makinesi
-                </h3>
-
-                <p>
-                    Günlük hesaplamalar için
-                    hızlı ve modern hesap makinesi.
-                </p>
-
-                <div class="app-footer">
-
-                    <div class="status">
-                        <i></i>
-                        Hazır
-                    </div>
-
-                    <div class="open-arrow">
-                        →
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="app-card"
-                 style="--app-color:#8d75ff"
-                 data-name="Karayel AI"
-                 onclick="navigate('ai')">
-
-                <div class="app-icon">🤖</div>
-
-                <h3>
-                    Karayel AI
-                </h3>
-
-                <p>
-                    Karayel Yazılım'ın yapay zekâ
-                    deneyimini keşfet.
-                </p>
-
-                <div class="app-footer">
-
-                    <div class="status">
-                        <i></i>
-                        Aktif
-                    </div>
-
-                    <div class="open-arrow">
-                        →
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
+<section id="apps" class="page hidden">
+  <div class="section-head">
+    <div><h2>Uygulamalar</h2><p class="muted">Projelerimizi keşfet.</p></div>
+  </div>
+  <input id="searchInput" placeholder="🔎 Uygulama adı veya açıklama ara..." oninput="renderApps()">
+  <div id="appsGrid" class="grid" style="margin-top:18px"></div>
 </section>
 
-
-<!-- ================= AI ================= -->
-
-<section class="page ai-page" id="page-ai">
-
-    <div class="container">
-
-        <div class="page-header">
-
-            <div class="badge">
-                🤖 KARAYEL AI
-            </div>
-
-            <h2>
-                Yapay zekâ,
-                <span class="gradient-text">
-                    Karayel ile.
-                </span>
-            </h2>
-
-        </div>
-
-
-        <div class="ai-shell">
-
-            <div class="ai-top">
-
-                <div class="ai-brand">
-
-                    <div class="ai-avatar">
-                        ✦
-                    </div>
-
-                    <div>
-                        <b>Karayel AI</b>
-                        <span>● Çevrimiçi</span>
-                    </div>
-
-                </div>
-
-                <button class="icon-btn"
-                        onclick="clearChat()">
-                    ↻
-                </button>
-
-            </div>
-
-
-            <div class="ai-chat" id="aiChat">
-
-                <div class="message ai">
-                    Merhaba! 👋 Ben Karayel AI.
-                    Karayel Yazılım'ın yapay zekâ
-                    asistanı olarak buradayım.
-                    Bana bir şey sorabilirsin.
-                </div>
-
-            </div>
-
-
-            <div class="ai-input">
-
-                <input
-                    id="aiInput"
-                    type="text"
-                    placeholder="Karayel AI'a bir şey sor..."
-                    onkeydown="if(event.key==='Enter') sendAI()">
-
-                <button class="ai-send"
-                        onclick="sendAI()">
-                    ➤
-                </button>
-
-            </div>
-
-        </div>
-
+<section id="account" class="page hidden">
+  <div class="section-head"><div><h2>Hesabım</h2><p class="muted">Giriş yap veya yeni hesap oluştur.</p></div></div>
+  <div id="accountMessage" class="notice hidden"></div>
+  <div id="authForms" class="box">
+    <div class="form-grid">
+      <div><label for="authName">Adın (kayıt için)</label><input id="authName" autocomplete="name" placeholder="Adın soyadın"></div>
+      <div><label for="authEmail">E-posta</label><input id="authEmail" type="email" autocomplete="email" placeholder="ornek@mail.com"></div>
+      <div class="full"><label for="authPassword">Şifre</label><input id="authPassword" type="password" autocomplete="current-password" minlength="6" placeholder="En az 6 karakter"></div>
     </div>
-
+    <div class="actions">
+      <button class="primary" onclick="signIn()">Giriş Yap</button>
+      <button class="secondary" onclick="signUp()">Kayıt Ol</button>
+      <button class="secondary" onclick="resetPassword()">Şifremi Unuttum</button>
+    </div>
+    <p class="small muted">Kayıt sırasında e-posta doğrulaması istenebilir.</p>
+  </div>
+  <div id="loggedInBox" class="box hidden">
+    <h3 id="welcomeName">Hoş geldin!</h3>
+    <p id="accountRole" class="muted"></p>
+    <p id="accountEmail"></p>
+    <div class="actions">
+      <button class="secondary" onclick="go('favorites')">Favorilerim</button>
+      <button class="secondary" onclick="go('history')">Kullanım Geçmişim</button>
+      <button id="adminButton" class="primary hidden" onclick="go('admin')">Yönetici Paneli</button>
+      <button class="danger" onclick="signOut()">Çıkış Yap</button>
+    </div>
+  </div>
 </section>
 
-
-<!-- ================= NEWS ================= -->
-
-<section class="page" id="page-news">
-
-    <div class="container">
-
-        <div class="page-header">
-
-            <div class="badge">
-                KARAYEL GÜNCELLEMELERİ
-            </div>
-
-            <h2>
-                Neler
-                <span class="gradient-text">
-                    yeni?
-                </span>
-            </h2>
-
-            <p>
-                Karayel Yazılım ekosistemindeki gelişmeleri
-                ve yeni uygulamaları takip et.
-            </p>
-
-        </div>
-
-
-        <div class="news-grid">
-
-            <article class="news-card">
-                <div class="news-date">
-                    2026 • YENİ
-                </div>
-
-                <h3>
-                    Karayel Yazılım 2026
-                </h3>
-
-                <p>
-                    Yeni nesil Karayel Yazılım platformu
-                    modern arayüzüyle yayında.
-                </p>
-            </article>
-
-
-            <article class="news-card">
-                <div class="news-date">
-                    GELİŞTİRİLİYOR
-                </div>
-
-                <h3>
-                    Yeni uygulamalar
-                </h3>
-
-                <p>
-                    Karayel ekosistemine yeni masaüstü,
-                    mobil ve web uygulamaları ekleniyor.
-                </p>
-            </article>
-
-
-            <article class="news-card">
-                <div class="news-date">
-                    YAKINDA
-                </div>
-
-                <h3>
-                    Karayel AI
-                </h3>
-
-                <p>
-                    Yapay zekâ destekli yeni nesil
-                    Karayel deneyimi geliştiriliyor.
-                </p>
-            </article>
-
-        </div>
-
-    </div>
-
+<section id="favorites" class="page hidden">
+  <div class="section-head"><h2>⭐ Seçtiklerim</h2></div>
+  <div id="favoritesGrid" class="grid"></div>
 </section>
 
-
-<!-- ================= ABOUT ================= -->
-
-<section class="page" id="page-about">
-
-    <div class="container">
-
-        <div class="page-header">
-
-            <div class="badge">
-                KARAYEL YAZILIM
-            </div>
-
-            <h2>
-                Teknolojiye
-                <span class="gradient-text">
-                    farklı bakış.
-                </span>
-            </h2>
-
-        </div>
-
-
-        <div class="about-grid">
-
-            <div class="info-card">
-
-                <h3>
-                    Biz Kimiz?
-                </h3>
-
-                <p>
-                    Karayel Yazılım; kullanımı kolay,
-                    modern ve erişilebilir yazılım ürünleri
-                    geliştirme amacıyla oluşturulmuş
-                    dijital bir yazılım markasıdır.
-                </p>
-
-                <p style="margin-top:15px">
-                    Hedefimiz karmaşık teknolojileri
-                    herkes için daha anlaşılır ve
-                    kullanışlı hale getirmektir.
-                </p>
-
-            </div>
-
-
-            <div class="info-card">
-
-                <h3>
-                    Değerlerimiz
-                </h3>
-
-                <div class="values">
-
-                    <div class="value">
-                        <div class="value-icon">⚡</div>
-                        <div>
-                            <b>Hız</b>
-                            <div style="color:var(--muted);font-size:11px">
-                                Hızlı ve akıcı deneyim
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="value">
-                        <div class="value-icon">🎯</div>
-                        <div>
-                            <b>Sadelik</b>
-                            <div style="color:var(--muted);font-size:11px">
-                                Gereksiz karmaşadan uzak
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="value">
-                        <div class="value-icon">💡</div>
-                        <div>
-                            <b>Yenilik</b>
-                            <div style="color:var(--muted);font-size:11px">
-                                Sürekli gelişen teknoloji
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
+<section id="history" class="page hidden">
+  <div class="section-head"><h2>Kullanım Geçmişim</h2></div>
+  <div id="historyList" class="list"></div>
 </section>
 
+<section id="notes" class="page hidden">
+  <div class="section-head"><h2>Proje Notları</h2></div>
+  <div id="notesContent" class="box">
+    <h3>Karayel Yazılım Projeleri</h3>
+    <p class="muted">Yeni fikirler ve geliştirme notları burada yayınlanacak.</p>
+  </div>
+</section>
 
-<!-- ================= CONTACT ================= -->
+<section id="backup" class="page hidden">
+  <div class="section-head"><h2>Yedekleme</h2></div>
+  <div class="box">
+    <h3>Hesap ve veri güvenliği</h3>
+    <p class="muted">
+      Bu bölüm, site yönetimi ve kullanıcı verileri için bilgi amaçlıdır.
+      Yönetici yedekleri yalnızca yetkili veritabanı işlemleriyle alınmalıdır.
+    </p>
+    <button class="secondary" onclick="exportMyData()">Kişisel verilerimi dışa aktar</button>
+  </div>
+</section>
 
-<section class="page" id="page-contact">
+<section id="quran" class="page hidden">
+  <div class="section-head"><h2>Kur’an-ı Kerim</h2></div>
+  <div class="box">
+    <div style="font-size:45px">📖</div>
+    <h3>Kur’an projeleri</h3>
+    <p class="muted">
+      Kur’an-ı Kerim okuma, ezber ve ayetlerin anlamı projeleri bu bölümden
+      tanıtılabilir.
+    </p>
+    <p>Uygulama bağlantısı eklendiğinde buradan açılabilir.</p>
+  </div>
+</section>
 
-    <div class="container">
-
-        <div class="page-header">
-
-            <div class="badge">
-                İLETİŞİM
-            </div>
-
-            <h2>
-                Bizimle
-                <span class="gradient-text">
-                    iletişime geç.
-                </span>
-            </h2>
-
-            <p>
-                Fikirlerin, önerilerin veya projelerin varsa
-                Karayel Yazılım'a ulaşabilirsin.
-            </p>
-
-        </div>
-
-
-        <div class="contact-grid">
-
-            <div class="contact-cards">
-
-                <div class="contact-item">
-                    <span>MARKA</span>
-                    <strong>Karayel Yazılım 2026</strong>
-                </div>
-
-                <div class="contact-item">
-                    <span>WEB</span>
-                    <strong>karayelyazilim-studio.github.io</strong>
-                </div>
-
-                <div class="contact-item">
-                    <span>DURUM</span>
-                    <strong style="color:#35dda1">
-                        ● Aktif
-                    </strong>
-                </div>
-
-            </div>
-
-
-            <form class="contact-form"
-                  onsubmit="sendContact(event)">
-
-                <div class="form-group">
-                    <label>Adınız</label>
-                    <input
-                        id="contactName"
-                        required
-                        placeholder="Adınızı yazın">
-                </div>
-
-                <div class="form-group">
-                    <label>E-posta</label>
-                    <input
-                        id="contactEmail"
-                        type="email"
-                        required
-                        placeholder="E-posta adresiniz">
-                </div>
-
-                <div class="form-group">
-                    <label>Mesajınız</label>
-                    <textarea
-                        id="contactMessage"
-                        required
-                        placeholder="Mesajınızı yazın..."></textarea>
-                </div>
-
-                <button class="btn btn-primary"
-                        type="submit">
-                    Mesajı Gönder →
-                </button>
-
-            </form>
-
-        </div>
-
+<section id="admin" class="page hidden">
+  <div class="section-head">
+    <div><h2>🛠️ Yönetici Paneli</h2><p class="muted">Yalnızca yönetici hesabı erişebilir.</p></div>
+  </div>
+  <div id="adminMessage" class="notice hidden"></div>
+  <div class="box">
+    <h3>Uygulama ekle / düzenle</h3>
+    <input type="hidden" id="editAppId">
+    <div class="form-grid">
+      <div><label>Uygulama adı</label><input id="appTitle" placeholder="Karayel PDF Studio"></div>
+      <div><label>Simge (emoji)</label><input id="appIcon" placeholder="📄" maxlength="8"></div>
+      <div><label>Kategori</label><input id="appCategory" placeholder="Araçlar"></div>
+      <div><label>Uygulama bağlantısı</label><input id="appUrl" type="url" placeholder="https://..."></div>
+      <div class="full"><label>Açıklama</label><textarea id="appDescription" placeholder="Uygulamanın açıklaması..."></textarea></div>
     </div>
+    <div class="actions">
+      <button class="primary" onclick="saveApp()">Kaydet</button>
+      <button class="secondary" onclick="clearAppForm()">Formu temizle</button>
+    </div>
+  </div>
 
+  <div class="section-head"><h3>Mevcut uygulamalar</h3></div>
+  <div id="adminAppsList" class="list"></div>
+
+  <div class="section-head"><h3>Sayfa içeriğini düzenle</h3></div>
+  <div class="box">
+    <label>Sayfa anahtarı</label>
+    <select id="pageSlug">
+      <option value="notes">Proje Notları</option>
+      <option value="quran">Kur’an bölümü</option>
+    </select>
+    <label>Başlık</label><input id="pageTitle" placeholder="Sayfa başlığı">
+    <label>İçerik</label><textarea id="pageContent" placeholder="Sayfa içeriği"></textarea>
+    <div class="actions"><button class="primary" onclick="savePage()">Sayfayı kaydet</button></div>
+    <p class="small muted">Bu alanın çalışması için site_pages tablosunun uygun RLS politikaları bulunmalıdır.</p>
+  </div>
 </section>
 
 </main>
 
-
 <footer>
-    © 2026 Karayel Yazılım • Modern dijital çözümler.
+  <div class="wrap">
+    <span>© 2026 Karayel Yazılım</span>
+    <span>Hazırlayan: Muhammed Karayel</span>
+  </div>
 </footer>
+<div id="toast" role="status"></div>
 
-
-<div class="toast" id="toast"></div>
-
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+"use strict";
 
-/* =========================
-   PAGE ROUTER
-========================= */
+/* Supabase proje bilgileri */
+const SUPABASE_URL = "https://nzfwkgyjivbccctecmog.supabase.co";
+const SUPABASE_KEY = "sb_publishable_HNu5oTwnI78XUzJAcjltpA_KCFUjI_f";
 
-const pages = [
-    "home",
-    "apps",
-    "ai",
-    "news",
-    "about",
-    "contact"
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentUser = null;
+let currentProfile = null;
+let apps = [];
+let favoriteIds = new Set();
+let sitePages = {};
+
+/* İlk açılışta gösterilecek örnek uygulamalar.
+   Veritabanında uygulama varsa oradaki liste kullanılır. */
+const starterApps = [
+  {id:"local-pdf",title:"Karayel PDF Studio",description:"PDF dosyaları için kullanışlı araçlar.",category:"Araçlar",icon:"📄",url:""},
+  {id:"local-gallery",title:"Karayel Galeri",description:"Görsellerini düzenlemek için proje.",category:"Fotoğraf",icon:"🖼️",url:""},
+  {id:"local-english",title:"Karayel English AI",description:"İngilizce kelime öğrenme projesi.",category:"Eğitim",icon:"📚",url:""},
+  {id:"local-quran",title:"Kur’an-ı Kerim",description:"Kur’an okuma ve ezber projeleri.",category:"Eğitim",icon:"📖",url:""},
+  {id:"local-music",title:"Karayel Music Player",description:"Müzik dinleme uygulaması.",category:"Müzik",icon:"🎵",url:""},
+  {id:"local-animal",title:"Animal POV Studio",description:"Hayvan bakış açılı video fikirleri.",category:"Video",icon:"🐾",url:""}
 ];
 
-function navigate(page, updateHash = true){
-
-    if(!pages.includes(page)){
-        page = "home";
-    }
-
-    document.querySelectorAll(".page").forEach(el=>{
-        el.classList.remove("active");
-    });
-
-    const target = document.getElementById("page-" + page);
-
-    if(target){
-        target.classList.add("active");
-    }
-
-    document.querySelectorAll(".nav-btn").forEach(btn=>{
-        btn.classList.toggle(
-            "active",
-            btn.dataset.page === page
-        );
-    });
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-    closeMenu();
-
-    if(updateHash){
-
-        const newHash = "#" + page;
-
-        if(location.hash !== newHash){
-            history.pushState(
-                {page:page},
-                "",
-                newHash
-            );
-        }
-    }
-
-    document.title =
-        page === "home"
-        ? "Karayel Yazılım 2026"
-        : "Karayel " +
-          page.charAt(0).toUpperCase() +
-          page.slice(1) +
-          " • Karayel Yazılım";
+function el(id){return document.getElementById(id)}
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[ch]);
+}
+function safeUrl(value){
+  try{
+    const u = new URL(value);
+    return ["https:","http:"].includes(u.protocol) ? u.href : "";
+  }catch{return "";}
+}
+function toast(message){
+  const box=el("toast");
+  box.textContent=message;
+  box.style.display="block";
+  clearTimeout(toast.timer);
+  toast.timer=setTimeout(()=>box.style.display="none",3200);
+}
+function showMessage(id,message,type=""){
+  const box=el(id);
+  if(!box)return;
+  box.textContent=message;
+  box.className="notice"+(type?" "+type:"");
+  box.classList.remove("hidden");
+}
+function clearMessage(id){
+  const box=el(id);
+  if(box)box.classList.add("hidden");
 }
 
+/* Sayfa geçişleri */
+function go(id){
+  const target=el(id);
+  if(!target){
+    toast("Bu bölüm bulunamadı.");
+    return;
+  }
+  if(id==="admin" && currentProfile?.role!=="admin"){
+    toast("Bu bölüm yalnızca yöneticiye açıktır.");
+    id="account";
+  }
+  document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+  el(id).classList.remove("hidden");
+  document.querySelectorAll(".navlinks button").forEach(b=>b.classList.remove("active"));
+  const hash="#"+id;
+  history.replaceState(null,"",hash);
+  window.scrollTo({top:0,behavior:"smooth"});
 
-function loadRoute(){
-
-    let page =
-        location.hash
-        ? location.hash.substring(1)
-        : "home";
-
-    navigate(page,false);
+  if(id==="favorites")loadFavorites();
+  if(id==="history")loadHistory();
+  if(id==="admin")loadAdminApps();
+  if(id==="notes" || id==="quran")renderPageContent(id);
 }
-
-
-window.addEventListener("hashchange",loadRoute);
-
-window.addEventListener("popstate",()=>{
-    loadRoute();
+window.addEventListener("hashchange",()=>{
+  const id=location.hash.slice(1);
+  if(el(id))go(id);
 });
 
-loadRoute();
-
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-function toggleMenu(){
-
-    document
-        .getElementById("navLinks")
-        .classList.toggle("mobile-open");
+/* Uygulama kartları */
+function appCard(app){
+  const id=String(app.id);
+  const favorite=favoriteIds.has(id);
+  const url=safeUrl(app.url||"");
+  return `
+  <article class="card">
+    <div class="app-icon">${escapeHtml(app.icon||"⚡")}</div>
+    <div class="small muted">${escapeHtml(app.category||"Uygulama")}</div>
+    <h3>${escapeHtml(app.title||"İsimsiz uygulama")}</h3>
+    <p>${escapeHtml(app.description||"")}</p>
+    <div class="card-actions">
+      ${url
+        ? `<button class="primary" onclick="openApp('${escapeHtml(id)}')">Uygulamayı aç ↗</button>`
+        : `<button class="secondary" onclick="toast('Bu uygulamanın bağlantısı henüz eklenmedi.')">Yakında</button>`}
+      <button class="secondary" aria-label="Favoriye ekle" onclick="toggleFavorite('${escapeHtml(id)}')">${favorite?"★":"☆"}</button>
+    </div>
+  </article>`;
+}
+function renderApps(){
+  const q=(el("searchInput")?.value||"").trim().toLocaleLowerCase("tr-TR");
+  const filtered=apps.filter(a=>
+    [a.title,a.description,a.category].join(" ").toLocaleLowerCase("tr-TR").includes(q)
+  );
+  el("appsGrid").innerHTML=filtered.length
+    ? filtered.map(appCard).join("")
+    : '<div class="empty">Aramana uygun uygulama bulunamadı.</div>';
+  el("homeApps").innerHTML=apps.slice(0,3).map(appCard).join("");
+  el("appCount").textContent=apps.length;
+}
+function openApp(id){
+  const app=apps.find(a=>String(a.id)===String(id));
+  if(!app)return;
+  const url=safeUrl(app.url||"");
+  if(!url){toast("Bu uygulamanın bağlantısı henüz eklenmedi.");return;}
+  if(currentUser){
+    db.from("usage_history").insert({user_id:currentUser.id,app_id:id})
+      .then(({error})=>{if(error)console.warn("Geçmiş kaydedilemedi",error.message)});
+  }
+  window.open(url,"_blank","noopener,noreferrer");
 }
 
-function closeMenu(){
+/* Giriş / kayıt */
+async function signUp(){
+  clearMessage("accountMessage");
+  const name=el("authName").value.trim();
+  const email=el("authEmail").value.trim();
+  const password=el("authPassword").value;
+  if(!name || !email || password.length<6){
+    showMessage("accountMessage","Ad, geçerli e-posta ve en az 6 karakterli şifre gir.", "error");
+    return;
+  }
+  const {data,error}=await db.auth.signUp({
+    email,password,
+    options:{data:{display_name:name}}
+  });
+  if(error){
+    showMessage("accountMessage",error.message,"error");
+    return;
+  }
+  if(data.session){
+    await loadSession();
+    showMessage("accountMessage","Hesabın oluşturuldu.","success");
+  }else{
+    showMessage("accountMessage","Kayıt isteği gönderildi. E-postana doğrulama mesajı geldiyse onayla, sonra giriş yap.","success");
+  }
+}
+async function signIn(){
+  clearMessage("accountMessage");
+  const email=el("authEmail").value.trim();
+  const password=el("authPassword").value;
+  if(!email || !password){
+    showMessage("accountMessage","E-posta ve şifreni gir.","error");
+    return;
+  }
+  const {error}=await db.auth.signInWithPassword({email,password});
+  if(error){
+    showMessage("accountMessage",error.message,"error");
+    return;
+  }
+  await loadSession();
+  showMessage("accountMessage","Giriş başarılı.","success");
+}
+async function resetPassword(){
+  const email=el("authEmail").value.trim();
+  if(!email){
+    showMessage("accountMessage","Önce e-posta adresini yaz.","error");
+    return;
+  }
+  const {error}=await db.auth.resetPasswordForEmail(email,{
+    redirectTo:location.origin+location.pathname+"#account"
+  });
+  showMessage("accountMessage",error
+    ? error.message
+    : "Şifre sıfırlama bağlantısı e-posta adresine gönderildiyse gelen kutunu kontrol et.",
+    error?"error":"success");
+}
+async function signOut(){
+  const {error}=await db.auth.signOut();
+  if(error){toast(error.message);return;}
+  currentUser=null;
+  currentProfile=null;
+  favoriteIds.clear();
+  updateAccountUI();
+  go("home");
+  toast("Çıkış yapıldı.");
+}
+async function loadSession(){
+  const {data,error}=await db.auth.getSession();
+  if(error)console.error(error);
+  currentUser=data?.session?.user||null;
+  currentProfile=null;
+  favoriteIds.clear();
 
-    document
-        .getElementById("navLinks")
-        .classList.remove("mobile-open");
+  if(currentUser){
+    const {data:profile,error:profileError}=await db
+      .from("profiles")
+      .select("id,display_name,role")
+      .eq("id",currentUser.id)
+      .maybeSingle();
+
+    if(profileError)console.warn("Profil okunamadı:",profileError.message);
+    currentProfile=profile||{id:currentUser.id,display_name:currentUser.user_metadata?.display_name||"",role:"user"};
+
+    const {data:favs,error:favError}=await db
+      .from("favorites").select("app_id").eq("user_id",currentUser.id);
+    if(!favError && favs)favoriteIds=new Set(favs.map(f=>String(f.app_id)));
+  }
+  updateAccountUI();
+  renderApps();
+}
+function updateAccountUI(){
+  const logged=!!currentUser;
+  el("authForms").classList.toggle("hidden",logged);
+  el("loggedInBox").classList.toggle("hidden",!logged);
+  el("accountButton").textContent=logged
+    ? (currentProfile?.display_name||"Hesabım")
+    : "Giriş / Kayıt";
+  el("memberState").textContent=logged?"Giriş yapıldı":"Misafir";
+
+  if(logged){
+    el("welcomeName").textContent="Hoş geldin, "+(currentProfile?.display_name||"kullanıcı")+"!";
+    el("accountRole").textContent=currentProfile?.role==="admin"?"Yönetici hesabı":"Standart kullanıcı";
+    el("accountEmail").textContent=currentUser.email||"";
+    el("adminButton").classList.toggle("hidden",currentProfile?.role!=="admin");
+  }
 }
 
-
-/* =========================
-   THEME
-========================= */
-
-function toggleTheme(){
-
-    document.body.classList.toggle("light");
-
-    const light =
-        document.body.classList.contains("light");
-
-    localStorage.setItem(
-        "karayel-theme",
-        light ? "light" : "dark"
-    );
-
-    document.getElementById("themeButton").textContent =
-        light ? "☀️" : "🌙";
+/* Favoriler */
+async function toggleFavorite(id){
+  if(!currentUser){
+    toast("Favorileri kaydetmek için giriş yapmalısın.");
+    go("account");
+    return;
+  }
+  if(favoriteIds.has(String(id))){
+    const {error}=await db.from("favorites")
+      .delete().eq("user_id",currentUser.id).eq("app_id",id);
+    if(error){toast("Favori kaldırılamadı: "+error.message);return;}
+    favoriteIds.delete(String(id));
+  }else{
+    const {error}=await db.from("favorites")
+      .insert({user_id:currentUser.id,app_id:id});
+    if(error){toast("Favori eklenemedi: "+error.message);return;}
+    favoriteIds.add(String(id));
+  }
+  renderApps();
+  if(!el("favorites").classList.contains("hidden"))loadFavorites();
+}
+async function loadFavorites(){
+  if(!currentUser){
+    el("favoritesGrid").innerHTML='<div class="empty">Favorilerini görmek için giriş yap.</div>';
+    return;
+  }
+  const {data,error}=await db.from("favorites").select("app_id")
+    .eq("user_id",currentUser.id);
+  if(error){
+    el("favoritesGrid").innerHTML='<div class="empty">Favoriler yüklenemedi. Veritabanı izinlerini kontrol et.</div>';
+    return;
+  }
+  favoriteIds=new Set((data||[]).map(x=>String(x.app_id)));
+  const list=apps.filter(a=>favoriteIds.has(String(a.id)));
+  el("favoritesGrid").innerHTML=list.length
+    ? list.map(appCard).join("")
+    : '<div class="empty">Henüz favori uygulaman yok.</div>';
+  renderApps();
 }
 
-
-(function(){
-
-    const theme =
-        localStorage.getItem("karayel-theme");
-
-    if(theme === "light"){
-
-        document.body.classList.add("light");
-
-        document.getElementById("themeButton")
-            .textContent = "☀️";
-    }
-
-})();
-
-
-/* =========================
-   APP SEARCH
-========================= */
-
-function searchApps(){
-
-    const query =
-        document
-        .getElementById("appSearch")
-        .value
-        .toLowerCase()
-        .trim();
-
-    document
-        .querySelectorAll(".app-card")
-        .forEach(card=>{
-
-            const name =
-                card.dataset.name.toLowerCase();
-
-            card.style.display =
-                name.includes(query)
-                ? ""
-                : "none";
-
-        });
+/* Kullanım geçmişi */
+async function loadHistory(){
+  if(!currentUser){
+    el("historyList").innerHTML='<div class="empty">Geçmişini görmek için giriş yap.</div>';
+    return;
+  }
+  const {data,error}=await db.from("usage_history")
+    .select("app_id,created_at").eq("user_id",currentUser.id)
+    .order("created_at",{ascending:false}).limit(100);
+  if(error){
+    el("historyList").innerHTML='<div class="empty">Geçmiş yüklenemedi. Veritabanı izinlerini kontrol et.</div>';
+    return;
+  }
+  const rows=data||[];
+  el("historyList").innerHTML=rows.length?rows.map(row=>{
+    const app=apps.find(a=>String(a.id)===String(row.app_id));
+    const title=app?.title||"Uygulama";
+    const date=row.created_at?new Date(row.created_at).toLocaleString("tr-TR"):"";
+    return `<div class="row"><div><strong>${escapeHtml(title)}</strong><p>${escapeHtml(date)}</p></div></div>`;
+  }).join(""):'<div class="empty">Henüz kullanım geçmişi yok.</div>';
 }
 
+/* Uygulamaları Supabase'den yükle */
+async function loadApps(){
+  const {data,error}=await db.from("apps")
+    .select("id,title,description,category,icon,url")
+    .order("created_at",{ascending:false});
 
-/* =========================
-   APP OPEN
-========================= */
-
-function openApp(name){
-
-    showToast(
-        name +
-        " seçildi. Uygulama ekranı hazırlanıyor..."
-    );
+  if(error){
+    console.warn("Uygulamalar tablosu okunamadı:",error.message);
+    apps=starterApps.slice();
+    renderApps();
+    return;
+  }
+  apps=(data||[]).map(a=>({
+    ...a,
+    title:a.title||"İsimsiz uygulama",
+    description:a.description||"",
+    category:a.category||"Uygulama",
+    icon:a.icon||"⚡",
+    url:a.url||""
+  }));
+  renderApps();
 }
 
+/* Yönetici işlemleri */
+function isAdmin(){
+  return !!currentUser && currentProfile?.role==="admin";
+}
+async function saveApp(){
+  if(!isAdmin()){toast("Yönetici yetkisi gerekli.");return;}
+  const id=el("editAppId").value;
+  const title=el("appTitle").value.trim();
+  const description=el("appDescription").value.trim();
+  const category=el("appCategory").value.trim();
+  const icon=el("appIcon").value.trim()||"⚡";
+  const url=el("appUrl").value.trim();
 
-/* =========================
-   TOAST
-========================= */
+  if(!title){showMessage("adminMessage","Uygulama adı zorunludur.","error");return;}
+  if(url && !safeUrl(url)){
+    showMessage("adminMessage","Bağlantı http:// veya https:// ile başlamalı.","error");return;
+  }
+  const payload={title,description,category,icon,url};
 
-let toastTimer;
-
-function showToast(message){
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    clearTimeout(toastTimer);
-
-    toastTimer =
-        setTimeout(()=>{
-            toast.classList.remove("show");
-        },2800);
+  let result;
+  if(id){
+    result=await db.from("apps").update(payload).eq("id",id).select();
+  }else{
+    result=await db.from("apps").insert(payload).select();
+  }
+  if(result.error){
+    showMessage("adminMessage","Kaydedilemedi: "+result.error.message,"error");
+    return;
+  }
+  showMessage("adminMessage","Uygulama kaydedildi.","success");
+  clearAppForm();
+  await loadApps();
+  await loadAdminApps();
+}
+function clearAppForm(){
+  ["editAppId","appTitle","appDescription","appCategory","appIcon","appUrl"]
+    .forEach(id=>el(id).value="");
+}
+function editApp(id){
+  if(!isAdmin())return;
+  const app=apps.find(a=>String(a.id)===String(id));
+  if(!app)return;
+  el("editAppId").value=app.id;
+  el("appTitle").value=app.title||"";
+  el("appDescription").value=app.description||"";
+  el("appCategory").value=app.category||"";
+  el("appIcon").value=app.icon||"";
+  el("appUrl").value=app.url||"";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+async function deleteApp(id){
+  if(!isAdmin()){toast("Yönetici yetkisi gerekli.");return;}
+  if(!confirm("Bu uygulamayı silmek istediğine emin misin?"))return;
+  const {error}=await db.from("apps").delete().eq("id",id);
+  if(error){showMessage("adminMessage","Silinemedi: "+error.message,"error");return;}
+  toast("Uygulama silindi.");
+  await loadApps();
+  await loadAdminApps();
+}
+async function loadAdminApps(){
+  if(!isAdmin()){
+    go("account");
+    toast("Yönetici erişimi gerekli.");
+    return;
+  }
+  el("adminAppsList").innerHTML=apps.length?apps.map(a=>`
+    <div class="row">
+      <div><strong>${escapeHtml(a.icon||"⚡")} ${escapeHtml(a.title)}</strong>
+      <p>${escapeHtml(a.category||"")}</p></div>
+      <div class="actions">
+        <button class="secondary" onclick="editApp('${escapeHtml(a.id)}')">Düzenle</button>
+        <button class="danger" onclick="deleteApp('${escapeHtml(a.id)}')">Sil</button>
+      </div>
+    </div>`).join(""):'<div class="empty">Henüz veritabanında uygulama yok.</div>';
 }
 
-
-/* =========================
-   KARAYEL AI
-========================= */
-
-function sendAI(){
-
-    const input =
-        document.getElementById("aiInput");
-
-    const text =
-        input.value.trim();
-
-    if(!text) return;
-
-    addMessage(text,"user");
-
-    input.value = "";
-
-    setTimeout(()=>{
-
-        const response =
-            generateAIResponse(text);
-
-        addMessage(response,"ai");
-
-    },650);
+/* Sayfa içeriklerini düzenleme */
+async function loadPages(){
+  const {data,error}=await db.from("site_pages").select("slug,title,content");
+  if(error){console.warn("Sayfalar okunamadı:",error.message);return;}
+  sitePages={};
+  (data||[]).forEach(p=>sitePages[p.slug]=p);
+  renderPageContent("notes");
+  renderPageContent("quran");
 }
-
-
-function addMessage(text,type){
-
-    const chat =
-        document.getElementById("aiChat");
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "message " + type;
-
-    message.textContent = text;
-
-    chat.appendChild(message);
-
-    chat.scrollTop =
-        chat.scrollHeight;
+function renderPageContent(slug){
+  const p=sitePages[slug];
+  if(!p)return;
+  const container=el(slug==="notes"?"notesContent":"quran");
+  if(!container)return;
+  if(slug==="notes"){
+    container.innerHTML=`<h3>${escapeHtml(p.title||"Proje Notları")}</h3><p class="muted">${escapeHtml(p.content||"")}</p>`;
+  }else{
+    container.innerHTML=`<div class="section-head"><h2>${escapeHtml(p.title||"Kur’an-ı Kerim")}</h2></div><div class="box"><p>${escapeHtml(p.content||"")}</p></div>`;
+  }
 }
+async function savePage(){
+  if(!isAdmin()){toast("Yönetici yetkisi gerekli.");return;}
+  const slug=el("pageSlug").value;
+  const title=el("pageTitle").value.trim();
+  const content=el("pageContent").value.trim();
+  if(!title){toast("Başlık boş olamaz.");return;}
 
+  const {data:existing,error:findError}=await db.from("site_pages")
+    .select("slug").eq("slug",slug).maybeSingle();
+  if(findError){showMessage("adminMessage",findError.message,"error");return;}
 
-function generateAIResponse(text){
-
-    const q = text.toLowerCase();
-
-    if(
-        q.includes("merhaba") ||
-        q.includes("selam")
-    ){
-        return "Merhaba! 👋 Karayel AI burada. Sana nasıl yardımcı olabilirim?";
-    }
-
-    if(
-        q.includes("karayel") &&
-        q.includes("yazılım")
-    ){
-        return "Karayel Yazılım 2026; modern, kullanışlı ve erişilebilir dijital uygulamalar geliştirmeyi hedefleyen bir yazılım platformudur.";
-    }
-
-    if(
-        q.includes("uygulama") ||
-        q.includes("program")
-    ){
-        return "Karayel Yazılım bölümünden mevcut uygulamaları inceleyebilirsin. Yeni uygulamalar da eklenebilir.";
-    }
-
-    if(
-        q.includes("html") ||
-        q.includes("web sitesi")
-    ){
-        return "HTML, CSS ve JavaScript ile modern web uygulamaları oluşturabiliriz. İstersen tek dosyalık projeler de hazırlayabiliriz.";
-    }
-
-    if(
-        q.includes("teşekkür") ||
-        q.includes("sağol")
-    ){
-        return "Rica ederim! 😊 Karayel AI her zaman burada.";
-    }
-
-    return "Bunu anladım. 🤖 Bu Karayel AI sürümü demo olarak çalışıyor. Gerçek bir yapay zekâ modeline bağlandığında çok daha gelişmiş cevaplar verebilir.";
+  let result;
+  if(existing){
+    result=await db.from("site_pages").update({title,content}).eq("slug",slug);
+  }else{
+    result=await db.from("site_pages").insert({slug,title,content});
+  }
+  if(result.error){
+    showMessage("adminMessage","Sayfa kaydedilemedi: "+result.error.message,"error");
+    return;
+  }
+  await loadPages();
+  showMessage("adminMessage","Sayfa içeriği kaydedildi.","success");
 }
-
-
-function clearChat(){
-
-    const chat =
-        document.getElementById("aiChat");
-
-    chat.innerHTML = "";
-
-    addMessage(
-        "Sohbet temizlendi. 👋 Yeni bir konuşmaya başlayabiliriz.",
-        "ai"
-    );
-}
-
-
-/* =========================
-   CONTACT
-========================= */
-
-function sendContact(event){
-
-    event.preventDefault();
-
-    showToast(
-        "Mesaj formu hazırlandı. Gerçek gönderim için bir e-posta/backend bağlantısı eklenebilir."
-    );
-
-    event.target.reset();
-}
-
-
-/* =========================
-   MOUSE LIGHT EFFECT
-========================= */
-
-document.addEventListener("mousemove",e=>{
-
-    const x =
-        (e.clientX / window.innerWidth) * 100;
-
-    const y =
-        (e.clientY / window.innerHeight) * 100;
-
-    document.body.style.setProperty(
-        "--mouse-x",
-        x + "%"
-    );
-
-    document.body.style.setProperty(
-        "--mouse-y",
-        y + "%"
-    );
+el("pageSlug").addEventListener("change",()=>{
+  const p=sitePages[el("pageSlug").value];
+  el("pageTitle").value=p?.title||"";
+  el("pageContent").value=p?.content||"";
 });
 
+/* Kişisel verileri dışa aktar */
+async function exportMyData(){
+  if(!currentUser){toast("Önce giriş yap.");go("account");return;}
+  const {data:favs}=await db.from("favorites").select("app_id").eq("user_id",currentUser.id);
+  const {data:history}=await db.from("usage_history").select("app_id,created_at").eq("user_id",currentUser.id);
+  const payload={
+    exportedAt:new Date().toISOString(),
+    user:{email:currentUser.email,display_name:currentProfile?.display_name||""},
+    favorites:favs||[],
+    usage_history:history||[]
+  };
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download="karayel-kisisel-veriler.json";a.click();
+  URL.revokeObjectURL(url);
+}
 
-/* =========================
-   ESC
-========================= */
+/* Supabase bağlantısı ve ilk açılış */
+async function init(){
+  await loadApps();
+  await loadPages();
+  await loadSession();
 
-document.addEventListener("keydown",e=>{
-
-    if(e.key === "Escape"){
-        closeMenu();
-    }
-
+  const requested=location.hash.replace("#","");
+  const allowed=["home","apps","favorites","history","account","notes","backup","quran","admin"];
+  go(allowed.includes(requested)?requested:"home");
+}
+db.auth.onAuthStateChange((_event,_session)=>{
+  /* Auth callback içinde yeniden auth çağrısı yapmamak için sonraya bırakılır. */
+  setTimeout(()=>loadSession().catch(console.error),0);
 });
-
-
-/* =========================
-   PREVENT DOUBLE TAP ZOOM
-========================= */
-
-let lastTouchEnd = 0;
-
-document.addEventListener(
-    "touchend",
-    function(event){
-
-        const now =
-            new Date().getTime();
-
-        if(now - lastTouchEnd <= 300){
-            event.preventDefault();
-        }
-
-        lastTouchEnd = now;
-
-    },
-    false
-);
-
+init().catch(error=>{
+  console.error(error);
+  toast("Site başlatılırken bir hata oluştu. Sayfayı yenilemeyi dene.");
+});
 </script>
-
 </body>
-    </html>
+</html>
